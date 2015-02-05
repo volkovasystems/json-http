@@ -1,0 +1,29 @@
+{
+  "name": "json-http",
+  "main": "json-http.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/volkovasystems/json-http",
+  "authors": [
+    "Richeve S. Bebedor <volkovasystems@gmail.com>"
+  ],
+  "description": "Basic client json request utility.",
+  "keywords": [
+    "json",
+    "json-http",
+    "xhr",
+    "XMLHttpRequest",
+    "http",
+    "request"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "moduleType": [
+    "globals"
+  ]
+}
