@@ -1,4 +1,18 @@
-var jsonHttp = function jsonHttp( ){
+var jsonHttp = function jsonHttp( namespace ){
+	if( namespace && typeof namespace == "string" ){
+		if( namespace in jsonHttp.definitions ){
+			if( typeof jsonHttp.definitions[ namespace ] == "string" ){
+				namespace = jsonHttp.definitions[ namespace ];
+			}
+
+			return jsonHttp( )
+				.set
+		}
+	
+	}else if( namespace && typeof namespace != "string" ){
+
+	}
+
 	var data = {
 		"xmlHttp": new XMLHttpRequest( )
 	};
@@ -89,12 +103,31 @@ var jsonHttp = function jsonHttp( ){
 		return methods;
 	};
 	
-	var define = function define( option ){
-		if( !data.definitions ){
-			data.definitions = { };
+	var define = function define( definitions ){
+		if( !jsonHttp.definitions ){
+			jsonHttp.definitions = { };
 		}
 
-		
+		if( definitions.location in jsonHttp.definitions ||
+			definitions.namespace in jsonHttp.definitions )
+		{
+
+
+		}else{
+			jsonHttp.definitions[ definitions.location ] = definitions;
+
+			if( "namespace" in definitions ){
+				jsonHttp.definitions[ definitions.namesace ] = definitions.location;
+			}
+
+			var request = jsonHttp( )
+				.setLocation( definitions.location )
+				.setMethod( definitions.method );
+
+			definitions.request = request;
+
+			return request;
+		}
 	};
 	
 	var setLocation = function setLocation( location ){
@@ -165,6 +198,8 @@ var jsonHttp = function jsonHttp( ){
 				var result = JSON.parse( xmlHttp.responseText );
 				
 				onResponse( null, result, xmlHttp );
+
+				
 				
 			}else if( xmlHttp.readyState == 4 ){
 				onResponse( new Error( "request failed" ), null, xmlHttp );
